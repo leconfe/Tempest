@@ -151,7 +151,6 @@
 
 /* Container styles */
 .history-container {
-  margin-bottom: 15% !important;
   position: relative;
   overflow: hidden;
 }
@@ -490,7 +489,6 @@
   flex-wrap: wrap;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 15%;
   max-width: 1200px;
   gap: 40px;
   animation: fadeIn 1.2s ease-out;
@@ -639,7 +637,6 @@
 
 .conference-header {
   text-align: justify;
-  margin-bottom: 3rem;
 }
 
 .conference-header h1 {
