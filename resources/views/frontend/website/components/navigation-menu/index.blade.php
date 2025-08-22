@@ -1,15 +1,6 @@
 @props([
     'items' => [],
 ])
-@php
-$user = Auth::user();
-
-$profilePhotoUrl = null;
-
-if ($user) {
-    $profilePhotoUrl = $user->getFirstMediaUrl('profile', 'thumb');
-}
-@endphp
 <nav class="relative">
     <ul class="navbar-items flex items-center justify-center flex-1 p-1 space-x-1 list-none group">
         @foreach ($items as $key => $item)
@@ -37,11 +28,7 @@ if ($user) {
                         class="navigation-menu-item btn btn-ghost no-animation btn-sm rounded-lg inline-flex items-center justify-center px-4 transition-colors focus:outline-none disabled:opacity-50 disabled:pointer-events-none group w-max gap-0 ease-out duration-300"
                         >
                         <x-heroicon-m-chevron-down class="transition relative top-[1px] h-5 w-5" x-bind:class="{ '-rotate-180': open}" />
-                        @if ($profilePhotoUrl)
-                            <img src="{{ $profilePhotoUrl }}" alt="Profile Photo" class="w-10 h-10 ml-1 rounded-full">
-                        @else
-                            <span class="ml-1">{{ $item->getLabel() }}</span>
-                        @endif
+                        <span class="ml-1">{{ $item->getLabel() }}</span>
                     </button>
                     <div 
                         x-show="open"

@@ -2,22 +2,19 @@
 
 namespace Tempest;
 
-use App\Facades\Hook;
 use App\Classes\Theme;
+use App\Facades\Hook;
 use App\Forms\Components\TinyEditor;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\ColorPicker;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Illuminate\Support\Facades\Blade;
 use luizbills\CSS_Generator\Generator as CSSGenerator;
 use matthieumastadenis\couleur\ColorFactory;
 use matthieumastadenis\couleur\ColorSpace;
-use Illuminate\Support\Facades\Blade;
-
-
 
 class TempestTheme extends Theme
 {
@@ -30,11 +27,6 @@ class TempestTheme extends Theme
         Blade::anonymousComponentPath($this->getPluginPath('resources/views/frontend/website/components'), prefix: 'tempest');
     }
 
-    /**
-     * 
-     *
-     * @return array
-     */
     public function getFormSchema(): array
     {
         return [
@@ -79,8 +71,8 @@ class TempestTheme extends Theme
                 ->collapsed()
                 ->cloneable()
                 ->reorderableWithButtons()
-                ->reorderableWithDragAndDrop(True)
-				->blockNumbers(false)
+                ->reorderableWithDragAndDrop(true)
+                ->blockNumbers(false)
                 ->blocks([
                     Builder\Block::make('speakers')
                         ->label('Speakers')
@@ -100,7 +92,7 @@ class TempestTheme extends Theme
                         ->maxItems(1),
                     Builder\Block::make('layouts')
                         ->label('Custom Content')
-						->icon('heroicon-m-bars-3-bottom-left')
+                        ->icon('heroicon-m-bars-3-bottom-left')
                         ->schema([
                             TextInput::make('name_content')
                                 ->label('Title')
@@ -112,8 +104,6 @@ class TempestTheme extends Theme
                         ]),
 
                 ]),
-
-
 
         ];
     }
@@ -127,11 +117,11 @@ class TempestTheme extends Theme
             $cssTempest = $this->url('Tempest.css');
             $output .= "<link rel='stylesheet' type='text/css' href='$cssTempest'>";
 
-            $cssGenerator = new CSSGenerator();
+            $cssGenerator = new CSSGenerator;
 
             if ($appearanceColor = $this->getSetting('appearance_color')) {
                 $oklch = ColorFactory::new($appearanceColor)->to(ColorSpace::OkLch);
-                $cssGenerator = new CSSGenerator();
+                $cssGenerator = new CSSGenerator;
 
                 $cssGenerator->root_variable('primary-color', value: "{$oklch->lightness}% {$oklch->chroma} {$oklch->hue}");
             }
@@ -157,22 +147,21 @@ class TempestTheme extends Theme
         });
     }
 
-
     public function getFormData(): array
     {
         $banner = $this->getSetting('banner');
 
-        if (is_string($banner) && !empty($banner)) {
+        if (is_string($banner) && ! empty($banner)) {
             $banner = [$banner];
-        } elseif (!is_array($banner)) {
+        } elseif (! is_array($banner)) {
             $banner = [];
         }
 
         $countdown = $this->getSetting('countdown');
 
-        if (is_string($countdown) && !empty($countdown)) {
+        if (is_string($countdown) && ! empty($countdown)) {
             $countdown = [$countdown];
-        } elseif (!is_array($countdown)) {
+        } elseif (! is_array($countdown)) {
             $countdown = [];
         }
 
