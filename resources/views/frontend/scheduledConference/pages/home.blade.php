@@ -29,6 +29,11 @@
                             {{ new Illuminate\Support\HtmlString($layout['data']['about']) }}
                         </section>
                     @break
+                    @case('committees')
+                        @if ($currentScheduledConference?->committees->isNotEmpty())
+                            <x-scheduledConference::committees :data="$layout['data']" :committeeRoles="App\Models\CommitteeRole::with(['committees'])->get()"/>
+                        @endif
+                    @break
                     @case('speakers')
                         <x-scheduledConference::speakers />
                     @break

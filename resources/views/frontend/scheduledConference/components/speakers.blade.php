@@ -31,11 +31,11 @@
 												alt="{{ $speaker->fullName }}" />
 										</div>
 									</div>
-									<div class="text-center flex-grow flex flex-col justify-between min-h-[200px]">
+									<div class="text-center flex-grow flex flex-col justify-between min-h-[100px]">
 										<div>
 											<h4 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-gray-900 line-clamp-2 min-h-[2.5em]">{{ $speaker->fullName }}</h4>
 											@if ($speaker->getMeta('affiliation'))
-											<p class="text-xs sm:text-sm text-gray-600 px-2 sm:px-3 md:px-4 leading-relaxed mb-3 line-clamp-3 min-h-[3em]">{{ $speaker->getMeta('affiliation') }}</p>
+											<p class="text-xs sm:text-sm text-gray-600 px-2 sm:px-3 md:px-4 leading-relaxed line-clamp-3">{{ $speaker->getMeta('affiliation') }}</p>
 											@endif
 										</div>
 										@if($speaker->getMeta('scopus_url') || $speaker->getMeta('google_scholar_url') || $speaker->getMeta('orcid_url'))
