@@ -27,22 +27,22 @@
                     {{ $currentScheduledConference->title ?? 'Conference Title' }}
                 </h1>        
                 
+                @if($currentScheduledConference->date_start)
                 <div class="animate-slideUp delay-200 flex items-center backdrop-blur-sm bg-black/10 rounded-lg px-4 py-2 w-fit">
                     <svg class="w-6 h-6 inline-block mr-3 text-primary-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m4 4H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"></path>
                     </svg>
                     <p class="text-lg md:text-xl lg:text-2xl text-white">
-                        @if($currentScheduledConference->date_start)
                             @if($currentScheduledConference->date_end && $currentScheduledConference->date_start->format(Setting::get('format_date')) !== $currentScheduledConference->date_end->format(Setting::get('format_date')))
                                 <span class="inline-block">{{ $currentScheduledConference->date_start->format(Setting::get('format_date')) }}</span>
                                 <span class="inline-block"> -{{ $currentScheduledConference->date_end->format(Setting::get('format_date')) }}</span>
                             @else
                                 <span class="inline-block">{{ $currentScheduledConference->date_start->format(Setting::get('format_date')) }}</span>
                             @endif
-                        @endif
-                    </p>
+                        </p>
                 </div>
-               
+                @endif
+                    
                 <div class="animate-slideUp delay-300 flex items-center backdrop-blur-sm bg-black/10 rounded-lg px-4 py-2 w-fit">
                     <svg class="w-6 h-6 inline-block mr-3 text-primary-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
