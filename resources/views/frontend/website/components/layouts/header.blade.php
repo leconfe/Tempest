@@ -20,11 +20,10 @@
         </div>
     </div>
 </div>
-    
 @endif
 
 @if(app()->getCurrentConference() || app()->getCurrentScheduledConference())
-    <div id="navbar" class="navbar-container bg-black/50 absolute w-full text-white shadow z-50">
+    <div id="navbar" class="navbar-container bg-black/50 w-full text-white shadow z-50">
         <div class="backdrop-blur-md py-5 transition-all duration-100">
             <div class="navbar mx-auto max-w-7xl justify-between">
                 <div class="navbar-start items-center w-max gap-2">
@@ -53,14 +52,12 @@ function handleNavbarScroll() {
     const navbar = document.getElementById('navbar');
     const scrollPosition = window.scrollY;
 
-    if (scrollPosition > 50) {
-        navbar.classList.remove('absolute')
+    if (scrollPosition > 100) {
         navbar.classList.add('sticky', 'top-0')
         navbar.classList.remove('bg-black/50', 'text-white');
         navbar.classList.add('bg-white', 'text-black');
     } else {
         navbar.classList.remove('sticky', 'top-0')
-        navbar.classList.add('absolute')
         navbar.classList.remove('bg-white', 'text-black');
         navbar.classList.add('bg-black/50', 'text-white');
     }

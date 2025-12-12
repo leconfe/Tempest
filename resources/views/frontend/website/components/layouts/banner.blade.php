@@ -1,4 +1,4 @@
-<div class="">
+<div class="-mt-40">
     @php
         $images = $currentScheduledConference->getMedia('tempest-banner')->first();
         $imageUrls = $images ? $images->getAvailableUrl(['thumb', 'thumb-xl']) : null;
