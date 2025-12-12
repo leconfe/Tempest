@@ -10,10 +10,9 @@
     </div>
     <script>
         const endDate = new Date("{{ $currentScheduledConference->date_start?->format('Y-m-d H:i:s') }}").getTime();
-
+        const now = new Date().getTime();
+        const timeLeft = endDate - now;
         function updateCountdown() {
-            const now = new Date().getTime();
-            const timeLeft = endDate - now;
             const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
             const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
@@ -23,6 +22,7 @@
             document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
             document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
             if (timeLeft < 0) {
+                console.log(timeLeft)
                 clearInterval(countdownTimer);
                 document.querySelector('.countdown-con').innerHTML = `
                     <div class="cd-passed p-2 sm:p-3 text-center rounded-lg shadow-lg">
@@ -36,6 +36,8 @@
                 `;
             }
         }
+        const countdownTimer = setInterval(updateCountdown, 1000);
+
 
         
         if(!endDate){
@@ -50,9 +52,7 @@
             </div>
             `;
         } else {
-            const countdownTimer = setInterval(updateCountdown, 1000);
             updateCountdown(); // Initial call
-
         }
 
     </script>

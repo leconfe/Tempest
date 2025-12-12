@@ -1,4 +1,4 @@
-<div class="banner relative overflow-visible -mt-[5%] mb-[50%] sm:mb-[30%] md:mb-[10%] z-10">
+<div class="">
     @php
         $images = $currentScheduledConference->getMedia('tempest-banner')->first();
         $imageUrls = $images ? $images->getAvailableUrl(['thumb', 'thumb-xl']) : null;
@@ -7,19 +7,8 @@
         $imagecountdown = $imagess ? $imagess->getAvailableUrl(['thumb', 'thumb-xl']) : null;
     @endphp
 
-    <div class="animate-fadeIn relative">
-        @if($imageUrls)
-            <div class="banner-bg w-full h-auto aspect-[16/8]">
-                <img src="{{ $imageUrls }}" alt="Conference Banner"     
-                     class="w-full h-full object-cover banner-image">
-            </div>
-        @else
-            <div class="banner-bg w-full h-auto aspect-[16/8]"></div>
-        @endif
-    </div>
-
     @if(app()->getCurrentConference() || app()->getCurrentScheduledConference())
-    <div class="conference-title absolute inset-0 z-20">
+    <div class="conference-title py-40 bg-cover bg-no-repeat sm:bg-cover sm:bg-center" style="background-image: url('{{ $imageUrls }}')">
         <div class="relative h-full flex items-center">
             <div class="p-4 md:p-8 lg:p-12 xl:p-16 space-y-6 md:space-y-8 max-w-6xl">
                 <h1 id="conference-title" 
@@ -29,7 +18,7 @@
                 
                 @if($currentScheduledConference->date_start)
                 <div class="animate-slideUp delay-200 flex items-center backdrop-blur-sm bg-black/10 rounded-lg px-4 py-2 w-fit">
-                    <svg class="w-6 h-6 inline-block mr-3 text-primary-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-6 h-6 inline-block mr-3 text-white shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m4 4H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"></path>
                     </svg>
                     <p class="text-lg md:text-xl lg:text-2xl text-white">
@@ -44,7 +33,7 @@
                 @endif
                     
                 <div class="animate-slideUp delay-300 flex items-center backdrop-blur-sm bg-black/10 rounded-lg px-4 py-2 w-fit">
-                    <svg class="w-6 h-6 inline-block mr-3 text-primary-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-6 h-6 inline-block mr-3 text-white shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                     </svg>
@@ -75,7 +64,7 @@
         </div>
     </div>
 
-    <div class="countdown-section absolute left-0 right-0 -bottom-24 md:-bottom-20 z-50">
+    <div class="countdown-section -mt-24">
         <div class="animate-slideUp delay-500 countdown-con w-full max-w-5xl mx-auto backdrop-blur-md bg-white rounded-2xl border border-white/20 shadow-2xl p-6"
              style="background-image: url('{{ $imagecountdown }}');">
              <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
