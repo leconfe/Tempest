@@ -8,7 +8,7 @@
         {{-- Load Header Layout --}}
         <x-tempest::layouts.header/>
 
-        <main class="py-3 bg-white w-full">
+        <main class="bg-white w-full">
             {{-- Load Main Layout --}}
             {{ $slot }}
         </main>

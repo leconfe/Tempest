@@ -1311,9 +1311,9 @@
     margin-top: -9.8% !important;
   }
 
-  .banner-bg {
+  /* .banner-bg {
     background: linear-gradient(to right, oklch(var(--primary-color)), oklch(var(--secondary-color)));
-  }
+  } */
   .banner-image {
     width: 100%;
     height: auto;
@@ -1327,9 +1327,9 @@
     margin-top: -9.8% !important;
   }
 
-  .banner-bg {
+  /* .banner-bg {
     background: linear-gradient(to right, oklch(var(--primary-color)), oklch(var(--secondary-color)));
-  }
+  } */
 
   .banner-image {
     width: 100%;
@@ -1854,7 +1854,7 @@
 
 
   .banner-bg {
-    display: none;
+    /* display: none; */
   }
 
   .info-card {
@@ -2001,7 +2001,6 @@
   }
 
   .banner {
-    margin-top: -40% !important;
     background-color: #5a5a5a;
     height: 905px;
   }
@@ -2091,9 +2090,6 @@
     height: 880px;
   }
 
-  .conference-title {
-    margin-top: -40% !important;
-  }
 
   .conference-title h1 {
     font-size: 22px;
