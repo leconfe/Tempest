@@ -10,9 +10,10 @@
     </div>
     <script>
         const endDate = new Date("{{ $currentScheduledConference->date_start?->format('Y-m-d H:i:s') }}").getTime();
-        const now = new Date().getTime();
-        const timeLeft = endDate - now;
+
         function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = endDate - now;
             const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
             const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
