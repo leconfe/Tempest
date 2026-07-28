@@ -124,24 +124,38 @@ class TempestTheme extends Theme
             $cssGenerator = new CSSGenerator;
 
             if ($appearanceColor = $this->getSetting('appearance_color')) {
-                $oklch = ColorFactory::new($appearanceColor)->to(ColorSpace::OkLch);
-                $cssGenerator = new CSSGenerator;
-
-                $cssGenerator->root_variable('primary-color', value: "{$oklch->lightness}% {$oklch->chroma} {$oklch->hue}");
+                try {
+                    $oklch = ColorFactory::new($appearanceColor)->to(ColorSpace::OkLch);
+                    $cssGenerator->root_variable('primary-color', value: "{$oklch->lightness}% {$oklch->chroma} {$oklch->hue}");
+                } catch (\Throwable $th) {
+                    // Fallback if color parsing fails
+                }
             }
 
             if ($borderColor = $this->getSetting('secondary_color')) {
-                $oklchBorder = ColorFactory::new($borderColor)->to(ColorSpace::OkLch);
-                $cssGenerator->root_variable('secondary-color', value: "{$oklchBorder->lightness}% {$oklchBorder->chroma} {$oklchBorder->hue}");
+                try {
+                    $oklchBorder = ColorFactory::new($borderColor)->to(ColorSpace::OkLch);
+                    $cssGenerator->root_variable('secondary-color', value: "{$oklchBorder->lightness}% {$oklchBorder->chroma} {$oklchBorder->hue}");
+                } catch (\Throwable $th) {
+                    // Fallback
+                }
             }
 
             if ($textColor = $this->getSetting('text_color')) {
-                $oklchText = ColorFactory::new($textColor)->to(ColorSpace::OkLch);
-                $cssGenerator->root_variable('text-color', value: "{$oklchText->lightness}% {$oklchText->chroma} {$oklchText->hue}");
+                try {
+                    $oklchText = ColorFactory::new($textColor)->to(ColorSpace::OkLch);
+                    $cssGenerator->root_variable('text-color', value: "{$oklchText->lightness}% {$oklchText->chroma} {$oklchText->hue}");
+                } catch (\Throwable $th) {
+                    // Fallback
+                }
             }
 
-            $oklch = ColorFactory::new('#1F2937')->to(ColorSpace::OkLch);
-            $cssGenerator->root_variable('bc', "{$oklch->lightness}% {$oklch->chroma} {$oklch->hue}");
+            try {
+                $oklch = ColorFactory::new('#1F2937')->to(ColorSpace::OkLch);
+                $cssGenerator->root_variable('bc', "{$oklch->lightness}% {$oklch->chroma} {$oklch->hue}");
+            } catch (\Throwable $th) {
+                // Fallback
+            }
 
             $output .= <<<HTML
             <style>
