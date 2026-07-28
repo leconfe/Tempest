@@ -12,11 +12,20 @@
 				<div class="bg-white p-6 sm:p-8 md:p-10 lg:p-12 rounded-2xl sm:rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.08)]">
 					<div class="flex flex-wrap justify-center gap-6 sm:gap-8">
 						@foreach($partners as $partner)
+						@php
+							$url = $partner->url ?? $partner->getMeta('url') ?? $partner->description;
+						@endphp
 						<div class="w-[calc(100%-2rem)] sm:w-[calc(50%-2rem)] md:w-[calc(33.333%-2rem)] lg:w-[calc(25%-2rem)] xl:w-[calc(20%-2rem)] flex items-center justify-center p-4 aspect-[4/3]">
-							<img class="w-full h-full object-contain hover:-translate-y-1 transition-all duration-300"
-								src="{{ $partner->getFirstMediaUrl('logo') }}"
-								alt="{{ $partner->name }}" 
-								loading="lazy"/>
+							@if($url)
+								<a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="w-full h-full flex items-center justify-center">
+							@endif
+								<img class="w-full h-full object-contain hover:-translate-y-1 transition-all duration-300"
+									src="{{ $partner->getFirstMediaUrl('logo') }}"
+									alt="{{ $partner->name }}" 
+									loading="lazy"/>
+							@if($url)
+								</a>
+							@endif
 						</div>
 						@endforeach
 					</div>
