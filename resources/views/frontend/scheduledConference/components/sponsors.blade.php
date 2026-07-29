@@ -18,11 +18,7 @@
 							@continue
 							@endif
 							@php
-								$rawUrl = trim($sponsor->url ?? $sponsor->getMeta('url') ?? '');
-								$url = null;
-								if (!empty($rawUrl) && (filter_var($rawUrl, FILTER_VALIDATE_URL) || filter_var('https://' . $rawUrl, FILTER_VALIDATE_URL))) {
-									$url = \Illuminate\Support\Str::startsWith($rawUrl, ['http://', 'https://']) ? $rawUrl : 'https://' . $rawUrl;
-								}
+								$url = $sponsor->getMeta('url');
 							@endphp
 							<div class="w-[calc(100%-2rem)] sm:w-[calc(50%-2rem)] md:w-[calc(33.333%-2rem)] lg:w-[calc(25%-2rem)] xl:w-[calc(20%-2rem)] flex items-center justify-center p-4 aspect-[4/3]">
 								@if($url)
@@ -53,11 +49,7 @@
 							@continue
 							@endif
 							@php
-								$rawUrl = trim($sponsor->url ?? $sponsor->getMeta('url') ?? '');
-								$url = null;
-								if (!empty($rawUrl) && (filter_var($rawUrl, FILTER_VALIDATE_URL) || filter_var('https://' . $rawUrl, FILTER_VALIDATE_URL))) {
-									$url = \Illuminate\Support\Str::startsWith($rawUrl, ['http://', 'https://']) ? $rawUrl : 'https://' . $rawUrl;
-								}
+								$url = $sponsor->getMeta('url');
 							@endphp
 							<div class="w-[calc(100%-2rem)] sm:w-[calc(50%-2rem)] md:w-[calc(33.333%-2rem)] lg:w-[calc(25%-2rem)] xl:w-[calc(20%-2rem)] flex items-center justify-center p-4 aspect-[4/3]">
 								@if($url)
