@@ -13,11 +13,7 @@
 					<div class="flex flex-wrap justify-center gap-6 sm:gap-8">
 						@foreach($partners as $partner)
 						@php
-							$rawUrl = trim($partner->url ?? $partner->getMeta('url') ?? '');
-							$url = null;
-							if (!empty($rawUrl) && (filter_var($rawUrl, FILTER_VALIDATE_URL) || filter_var('https://' . $rawUrl, FILTER_VALIDATE_URL))) {
-								$url = \Illuminate\Support\Str::startsWith($rawUrl, ['http://', 'https://']) ? $rawUrl : 'https://' . $rawUrl;
-							}
+							$url = $partner->getMeta('url');
 						@endphp
 						<div class="w-[calc(100%-2rem)] sm:w-[calc(50%-2rem)] md:w-[calc(33.333%-2rem)] lg:w-[calc(25%-2rem)] xl:w-[calc(20%-2rem)] flex items-center justify-center p-4 aspect-[4/3]">
 							@if($url)
