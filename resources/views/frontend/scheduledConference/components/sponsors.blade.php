@@ -17,11 +17,20 @@
 							@if(!$sponsor->getFirstMedia('logo'))
 							@continue
 							@endif
+							@php
+								$url = $sponsor->getMeta('url');
+							@endphp
 							<div class="w-[calc(100%-2rem)] sm:w-[calc(50%-2rem)] md:w-[calc(33.333%-2rem)] lg:w-[calc(25%-2rem)] xl:w-[calc(20%-2rem)] flex items-center justify-center p-4 aspect-[4/3]">
-								<img class="w-full h-full object-contain hover:-translate-y-1 transition-all duration-300" 
-									src="{{ $sponsor->getFirstMediaUrl('logo') }}"
-									alt="{{ $sponsor->name }}"
-									loading="lazy" />
+								@if($url)
+									<a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="w-full h-full flex items-center justify-center">
+								@endif
+									<img class="w-full h-full object-contain hover:-translate-y-1 transition-all duration-300" 
+										src="{{ $sponsor->getFirstMediaUrl('logo') }}"
+										alt="{{ $sponsor->name }}"
+										loading="lazy" />
+								@if($url)
+									</a>
+								@endif
 							</div>
 							@endforeach
 						</div>
@@ -39,11 +48,20 @@
 							@if(!$sponsor->getFirstMedia('logo'))
 							@continue
 							@endif
+							@php
+								$url = $sponsor->getMeta('url');
+							@endphp
 							<div class="w-[calc(100%-2rem)] sm:w-[calc(50%-2rem)] md:w-[calc(33.333%-2rem)] lg:w-[calc(25%-2rem)] xl:w-[calc(20%-2rem)] flex items-center justify-center p-4 aspect-[4/3]">
-								<img class="w-full h-full object-contain hover:-translate-y-1 transition-all duration-300" 
-									src="{{ $sponsor->getFirstMediaUrl('logo') }}"
-									alt="{{ $sponsor->name }}"
-									loading="lazy" />
+								@if($url)
+									<a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="w-full h-full flex items-center justify-center">
+								@endif
+									<img class="w-full h-full object-contain hover:-translate-y-1 transition-all duration-300" 
+										src="{{ $sponsor->getFirstMediaUrl('logo') }}"
+										alt="{{ $sponsor->name }}"
+										loading="lazy" />
+								@if($url)
+									</a>
+								@endif
 							</div>
 							@endforeach
 						</div>
