@@ -37,13 +37,11 @@ class TempestTheme extends Theme
                 ->collection('tempest-banner')
                 ->label('Upload Banner Images')
                 ->image()
-                ->conversion('thumb-xl')
                 ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp']),
             SpatieMediaLibraryFileUpload::make('countdown')
                 ->collection('tempest-countdown')
                 ->label('Upload Countdown Background')
                 ->image()
-                ->conversion('thumb-xl')
                 ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp']),
             ColorPicker::make('appearance_color')
                 ->regex('/^#?(([a-f0-9]{3}){1,2})$/i')
@@ -77,22 +75,27 @@ class TempestTheme extends Theme
                     Builder\Block::make('speakers')
                         ->label('Speakers')
                         ->icon('heroicon-o-users')
+                        ->schema([])
                         ->maxItems(1),
                     Builder\Block::make('committees')
                         ->label('Committees')
                         ->icon('heroicon-o-users')
+                        ->schema([])
                         ->maxItems(1),
                     Builder\Block::make('sponsors')
                         ->label('Sponsors')
                         ->icon('heroicon-o-building-office-2')
+                        ->schema([])
                         ->maxItems(1),
                     Builder\Block::make('partners')
                         ->label('Partners')
                         ->icon('heroicon-o-building-office')
+                        ->schema([])
                         ->maxItems(1),
                     Builder\Block::make('latest-news')
                         ->label('Latest News')
                         ->icon('heroicon-o-newspaper')
+                        ->schema([])
                         ->maxItems(1),
                     Builder\Block::make('layouts')
                         ->label('Custom Content')
