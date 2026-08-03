@@ -37,13 +37,11 @@ class TempestTheme extends Theme
                 ->collection('tempest-banner')
                 ->label('Upload Banner Images')
                 ->image()
-                ->conversion('thumb-xl')
                 ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp']),
             SpatieMediaLibraryFileUpload::make('countdown')
                 ->collection('tempest-countdown')
                 ->label('Upload Countdown Background')
                 ->image()
-                ->conversion('thumb-xl')
                 ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp']),
             ColorPicker::make('appearance_color')
                 ->regex('/^#?(([a-f0-9]{3}){1,2})$/i')
@@ -77,22 +75,27 @@ class TempestTheme extends Theme
                     Builder\Block::make('speakers')
                         ->label('Speakers')
                         ->icon('heroicon-o-users')
+                        ->schema([])
                         ->maxItems(1),
                     Builder\Block::make('committees')
                         ->label('Committees')
                         ->icon('heroicon-o-users')
+                        ->schema([])
                         ->maxItems(1),
                     Builder\Block::make('sponsors')
                         ->label('Sponsors')
                         ->icon('heroicon-o-building-office-2')
+                        ->schema([])
                         ->maxItems(1),
                     Builder\Block::make('partners')
                         ->label('Partners')
                         ->icon('heroicon-o-building-office')
+                        ->schema([])
                         ->maxItems(1),
                     Builder\Block::make('latest-news')
                         ->label('Latest News')
                         ->icon('heroicon-o-newspaper')
+                        ->schema([])
                         ->maxItems(1),
                     Builder\Block::make('layouts')
                         ->label('Custom Content')
@@ -124,24 +127,38 @@ class TempestTheme extends Theme
             $cssGenerator = new CSSGenerator;
 
             if ($appearanceColor = $this->getSetting('appearance_color')) {
-                $oklch = ColorFactory::new($appearanceColor)->to(ColorSpace::OkLch);
-                $cssGenerator = new CSSGenerator;
-
-                $cssGenerator->root_variable('primary-color', value: "{$oklch->lightness}% {$oklch->chroma} {$oklch->hue}");
+                try {
+                    $oklch = ColorFactory::new($appearanceColor)->to(ColorSpace::OkLch);
+                    $cssGenerator->root_variable('primary-color', value: "{$oklch->lightness}% {$oklch->chroma} {$oklch->hue}");
+                } catch (\Throwable $th) {
+                    // Fallback if color parsing fails
+                }
             }
 
             if ($borderColor = $this->getSetting('secondary_color')) {
-                $oklchBorder = ColorFactory::new($borderColor)->to(ColorSpace::OkLch);
-                $cssGenerator->root_variable('secondary-color', value: "{$oklchBorder->lightness}% {$oklchBorder->chroma} {$oklchBorder->hue}");
+                try {
+                    $oklchBorder = ColorFactory::new($borderColor)->to(ColorSpace::OkLch);
+                    $cssGenerator->root_variable('secondary-color', value: "{$oklchBorder->lightness}% {$oklchBorder->chroma} {$oklchBorder->hue}");
+                } catch (\Throwable $th) {
+                    // Fallback
+                }
             }
 
             if ($textColor = $this->getSetting('text_color')) {
-                $oklchText = ColorFactory::new($textColor)->to(ColorSpace::OkLch);
-                $cssGenerator->root_variable('text-color', value: "{$oklchText->lightness}% {$oklchText->chroma} {$oklchText->hue}");
+                try {
+                    $oklchText = ColorFactory::new($textColor)->to(ColorSpace::OkLch);
+                    $cssGenerator->root_variable('text-color', value: "{$oklchText->lightness}% {$oklchText->chroma} {$oklchText->hue}");
+                } catch (\Throwable $th) {
+                    // Fallback
+                }
             }
 
-            $oklch = ColorFactory::new('#1F2937')->to(ColorSpace::OkLch);
-            $cssGenerator->root_variable('bc', "{$oklch->lightness}% {$oklch->chroma} {$oklch->hue}");
+            try {
+                $oklch = ColorFactory::new('#1F2937')->to(ColorSpace::OkLch);
+                $cssGenerator->root_variable('bc', "{$oklch->lightness}% {$oklch->chroma} {$oklch->hue}");
+            } catch (\Throwable $th) {
+                // Fallback
+            }
 
             $output .= <<<HTML
             <style>

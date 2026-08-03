@@ -2,6 +2,6 @@
 
 use Tempest\TempestTheme;
 
-require 'vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 return new TempestTheme;
